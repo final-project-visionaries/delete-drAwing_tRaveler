@@ -16,9 +16,14 @@ router.get("/", async (req, res) => {
     res.status(500).send({ error: `error:${error}` });
   }
 });
-router.get("/:id", (req, res) => {
-  const id = req.params.id;
-  res.send(`/api/v1/images/:id のルーティングができたよ${id}`);
+router.post("/", async (req, res) => {
+  const body = req.body;
+  try {
+    await knex(imageTable).insert(body);
+    res.status(201).send({ message: "新規登録完了" });
+  } catch (error) {
+    res.status(500).send({ error: `error:${error}` });
+  }
 });
 
 module.exports = router;

@@ -10,6 +10,17 @@ function App() {
     const allData = await imagesApi.getAll();
     console.log("allData : ", allData);
   };
+  const create = async () => {
+    const sendData = {
+      image_name: "カバさん",
+      image_data: "data:image/png;base64,iVBORw0KGgoAAAANSU5ErkJggg4",
+    };
+    const res = await imagesApi.createData(sendData);
+    if (res.data.message === "新規登録完了") {
+      const allData = await imagesApi.getAll();
+      console.log("allData : ", allData);
+    }
+  };
 
   return (
     <>
@@ -18,7 +29,7 @@ function App() {
           <button onClick={getAll}>getAll</button>
         </div>
         <div>
-          <button>create</button>
+          <button onClick={create}>create</button>
         </div>
         <div>
           <button>update</button>
