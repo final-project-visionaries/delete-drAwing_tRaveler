@@ -39,4 +39,14 @@ router.patch("/:id", async (req, res) => {
   }
 });
 
+router.delete("/:id", async (req, res) => {
+  const imageId = Number(req.params.id);
+  try {
+    await knex(imageTable).where({ id: imageId }).delete();
+    res.status(200).send({ message: "削除完了" });
+  } catch (error) {
+    res.status(500).send({ error: `${error}` });
+  }
+});
+
 module.exports = router;
