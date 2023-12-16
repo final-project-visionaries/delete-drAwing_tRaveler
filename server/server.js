@@ -8,6 +8,9 @@ const setupServer = () => {
   const app = express();
   //JSON形式として認識する
   app.use(express.json());
+  // app.use(bodyParser.json({ limit: "50mb" }));
+  // app.use(bodyParser.urlencoded({ limit: "50mb", extended: true }));
+  app.use(express.urlencoded({ extended: true }));
   //全てのHttpリクエストに対してcorsを許可する
   app.use(cors());
 
