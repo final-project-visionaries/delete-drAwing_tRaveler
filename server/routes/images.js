@@ -13,7 +13,7 @@ router.get("/", async (req, res) => {
     );
     res.status(200).send(getAllData);
   } catch (error) {
-    res.status(500).send({ error: `error:${error}` });
+    res.status(500).send({ error: `${error}` });
   }
 });
 router.post("/", async (req, res) => {
@@ -22,7 +22,20 @@ router.post("/", async (req, res) => {
     await knex(imageTable).insert(body);
     res.status(201).send({ message: "新規登録完了" });
   } catch (error) {
-    res.status(500).send({ error: `error:${error}` });
+    res.status(500).send({ error: `${error}` });
+  }
+});
+
+router.patch("/:id", async (req, res) => {
+  const imageId = Number(req.params.id);
+  const body = req.body;
+  body.updated_at = new Date();
+
+  try {
+    await knex(imageTable).where({ id: imageId }).update(body);
+    res.status(200).send({ message: "修正完了" });
+  } catch (error) {
+    res.status(500).send({ error: `${error}` });
   }
 });
 

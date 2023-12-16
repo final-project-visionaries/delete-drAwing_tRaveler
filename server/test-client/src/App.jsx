@@ -21,6 +21,17 @@ function App() {
       console.log("allData : ", allData);
     }
   };
+  const update = async () => {
+    const sendData = {
+      image_name: "ワニさん",
+      // image_data: "data:image/png;base64,iVBORw0KGgoAAAANSU5ErkJggg4",
+    };
+    const res = await imagesApi.update(4, sendData);
+    if (res.data.message === "修正完了") {
+      const allData = await imagesApi.getAll();
+      console.log("allData : ", allData);
+    }
+  };
 
   return (
     <>
@@ -32,7 +43,7 @@ function App() {
           <button onClick={create}>create</button>
         </div>
         <div>
-          <button>update</button>
+          <button onClick={update}>update</button>
         </div>
         <div>
           <button>delete</button>
