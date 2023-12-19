@@ -4,6 +4,7 @@ const knex = require("../knexIndex");
 const imageTable = "images";
 
 router.get("/", async (req, res) => {
+  console.log("getメソッド届いています");
   try {
     const getAllData = await knex(imageTable).select(
       "id",
@@ -17,7 +18,9 @@ router.get("/", async (req, res) => {
   }
 });
 router.post("/", async (req, res) => {
+  console.log("post届いています");
   const body = req.body;
+  console.log("body :", body);
   try {
     await knex(imageTable).insert(body);
     res.status(201).send({ message: "新規登録完了" });
